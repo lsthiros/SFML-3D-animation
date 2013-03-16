@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2012 for Windows Desktop
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SFML 3D animation", "SFML 3D animation\SFML 3D animation.vcxproj", "{335CD416-7C2A-4FD2-BAE5-042D1A56C85C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{335CD416-7C2A-4FD2-BAE5-042D1A56C85C}.Debug|Win32.ActiveCfg = Debug|Win32
+		{335CD416-7C2A-4FD2-BAE5-042D1A56C85C}.Debug|Win32.Build.0 = Debug|Win32
+		{335CD416-7C2A-4FD2-BAE5-042D1A56C85C}.Release|Win32.ActiveCfg = Release|Win32
+		{335CD416-7C2A-4FD2-BAE5-042D1A56C85C}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

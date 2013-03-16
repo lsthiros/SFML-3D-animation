@@ -1,0 +1,18 @@
+﻿Build started 3/15/2013 11:36:29 PM.
+     1>Project "C:\Users\Louie\Documents\Visual Studio 2012\Projects\SFML 3D animation\SFML 3D animation\SFML 3D animation.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I"C:\Users\Louie\dev\AssImp\assimp--3.0.1270-sdk\include" /IC:\Users\Louie\dev\SFML\source\include /ZI /nologo /W3 /WX- /Od /Oy- /D SFML_STATIC /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt Mesh.cpp
+         Mesh.cpp
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Louie\Documents\Visual Studio 2012\Projects\SFML 3D animation\Debug\SFML 3D animation.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Users\Louie\dev\AssImp\AssImpBuild-s\contrib\zlib\Debug" /LIBPATH:"C:\Users\Louie\dev\SFML\SFML-build-s\lib\Debug" /LIBPATH:"C:\Users\Louie\dev\AssImp\AssImpBuild-s\code\Debug" zlibd.lib assimpD.lib "sfml-system-s-d.lib" "sfml-window-s-d.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Louie\Documents\Visual Studio 2012\Projects\SFML 3D animation\Debug\SFML 3D animation.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Louie\Documents\Visual Studio 2012\Projects\SFML 3D animation\Debug\SFML 3D animation.lib" /MACHINE:X86 Debug\Bone.obj
+         Debug\main.obj
+         Debug\Mesh.obj
+         Debug\Model.obj
+         Debug\Skeleton.obj
+            Creating library C:\Users\Louie\Documents\Visual Studio 2012\Projects\SFML 3D animation\Debug\SFML 3D animation.lib and object C:\Users\Louie\Documents\Visual Studio 2012\Projects\SFML 3D animation\Debug\SFML 3D animation.exp
+         SFML 3D animation.vcxproj -> C:\Users\Louie\Documents\Visual Studio 2012\Projects\SFML 3D animation\Debug\SFML 3D animation.exe
+     1>Done Building Project "C:\Users\Louie\Documents\Visual Studio 2012\Projects\SFML 3D animation\SFML 3D animation\SFML 3D animation.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:12.01
