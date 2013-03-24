@@ -7,6 +7,11 @@
 #include <cstdlib>
 #include <string>
 #include <iostream>
+#include <vector>
+
+#include "Mesh.h"
+
+typedef std::vector<Mesh*> MeshList;
 
 class Model{
 public:
@@ -14,6 +19,10 @@ public:
 	~Model();
 private:
 	std::string m_filename;
-	Assimp::Importer importer;
-	const aiScene* scene;
+	Assimp::Importer m_importer;
+	const aiScene* m_scene;
+	MeshList m_meshes;
+	void recursivelyFindMeshes(aiNode* currentNode);
+
+	void addMesh(aiNode* meshContainingNode, aiNode* rootNode);
 };

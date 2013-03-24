@@ -3,6 +3,11 @@
 #include <assimp\vector3.h>
 #include <assimp\scene.h>
 
+#include <vector>
+#include <map>
+
+#include "Bone.h"
+
 //this vertex struct made to shove straight into a VBO
 typedef struct Vertex {
 	float modelSpace[3];
@@ -11,22 +16,21 @@ typedef struct Vertex {
 	float boneWeighs[4];
 } Vertex;
 
-//doubt that this will be usefull
-typedef int face[3];
-
 class Mesh
 {
 private:
-	//nothing here yet
-	//TODO figure out what is private
-public:
-	//TODO do bones belong in here?
 	unsigned int m_numVertices;
 	Vertex* m_vertices;
-	aiNode* m_node;
+	aiNode* m_node, *m_root;
 	aiMesh* m_mesh;
-	aiMatrix4x4* m_transform;
-
-	Mesh(aiMesh *mesh, aiNode* node, aiMatrix4x4* transform);
+	aiMatrix4x4 m_transform;
+	std::string name;
+	Bone* m_skeleton;
+	//used for constructing skeleton. HOPEFULLY
+	Bone* constructSkeleton();
+	void findNecessaryBones(std::map<std::string, bool>& map);
+	void recursivelyZeroNecessityMap(std::map<std::string, bool>& map, aiNode* currentNode);
+public:
+	Mesh(aiMesh *mesh, aiNode* node, aiNode* rootNode, const aiMatrix4x4& transform);
 	~Mesh(void);
 };
