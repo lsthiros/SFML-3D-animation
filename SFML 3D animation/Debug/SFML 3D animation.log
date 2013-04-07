@@ -1,34 +1,34 @@
-﻿Build started 3/23/2013 11:28:43 PM.
+﻿Build started 4/5/2013 12:58:50 AM.
      1>Project "C:\Users\Louie\documents\visual studio 2012\Projects\SFML 3D animation\SFML 3D animation\SFML 3D animation.vcxproj" on node 2 (Rebuild target(s)).
      1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V110\Microsoft.CppClean.targets(75,5): warning : The process cannot access the file 'C:\Users\Louie\documents\visual studio 2012\Projects\SFML 3D animation\Debug\SFML 3D animation.ilk' because it is being used by another process.
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I"C:\Users\Louie\dev\AssImp\assimp--3.0.1270-sdk\include" /IC:\Users\Louie\dev\SFML\source\include /ZI /nologo /W3 /WX- /Od /Oy- /D SFML_STATIC /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt Bone.cpp main.cpp Mesh.cpp Model.cpp Skeleton.cpp
          Skeleton.cpp
-     1>c:\users\louie\documents\visual studio 2012\projects\sfml 3d animation\sfml 3d animation\bone.h(25): warning C4091: 'typedef ' : ignored on left of 'std::vector<_Ty>' when no variable is declared
+     1>c:\users\louie\documents\visual studio 2012\projects\sfml 3d animation\sfml 3d animation\bone.h(29): warning C4091: 'typedef ' : ignored on left of 'std::vector<_Ty>' when no variable is declared
                  with
                  [
                      _Ty=Bone *
                  ]
          Model.cpp
-     1>c:\users\louie\documents\visual studio 2012\projects\sfml 3d animation\sfml 3d animation\bone.h(25): warning C4091: 'typedef ' : ignored on left of 'std::vector<_Ty>' when no variable is declared
+     1>c:\users\louie\documents\visual studio 2012\projects\sfml 3d animation\sfml 3d animation\bone.h(29): warning C4091: 'typedef ' : ignored on left of 'std::vector<_Ty>' when no variable is declared
                  with
                  [
                      _Ty=Bone *
                  ]
          Mesh.cpp
-     1>c:\users\louie\documents\visual studio 2012\projects\sfml 3d animation\sfml 3d animation\bone.h(25): warning C4091: 'typedef ' : ignored on left of 'std::vector<_Ty>' when no variable is declared
+     1>c:\users\louie\documents\visual studio 2012\projects\sfml 3d animation\sfml 3d animation\bone.h(29): warning C4091: 'typedef ' : ignored on left of 'std::vector<_Ty>' when no variable is declared
                  with
                  [
                      _Ty=Bone *
                  ]
          main.cpp
-     1>c:\users\louie\documents\visual studio 2012\projects\sfml 3d animation\sfml 3d animation\bone.h(25): warning C4091: 'typedef ' : ignored on left of 'std::vector<_Ty>' when no variable is declared
+     1>c:\users\louie\documents\visual studio 2012\projects\sfml 3d animation\sfml 3d animation\bone.h(29): warning C4091: 'typedef ' : ignored on left of 'std::vector<_Ty>' when no variable is declared
                  with
                  [
                      _Ty=Bone *
                  ]
          Bone.cpp
-     1>c:\users\louie\documents\visual studio 2012\projects\sfml 3d animation\sfml 3d animation\bone.h(25): warning C4091: 'typedef ' : ignored on left of 'std::vector<_Ty>' when no variable is declared
+     1>c:\users\louie\documents\visual studio 2012\projects\sfml 3d animation\sfml 3d animation\bone.h(29): warning C4091: 'typedef ' : ignored on left of 'std::vector<_Ty>' when no variable is declared
                  with
                  [
                      _Ty=Bone *
@@ -47,4 +47,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:05.54
+Time Elapsed 00:00:11.71

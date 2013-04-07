@@ -22,14 +22,20 @@ private:
 	unsigned int m_numVertices;
 	Vertex* m_vertices;
 	aiNode* m_node, *m_root;
+	//ainode containing the this mesh
 	aiMesh* m_mesh;
+	//transformation of this mesh relative to parent
 	aiMatrix4x4 m_transform;
+	//name of the node containing this mesh
 	std::string name;
+	//root bone of the skeleton associated with this model
 	Bone* m_skeleton;
-	//used for constructing skeleton. HOPEFULLY
+	//private functions
 	Bone* constructSkeleton();
-	void findNecessaryBones(std::map<std::string, bool>& map);
+	aiNode* findNecessaryBones(std::map<std::string, bool>& map);
 	void recursivelyZeroNecessityMap(std::map<std::string, bool>& map, aiNode* currentNode);
+	aiNode* recursivelyFindNecessaryBones(std::map<std::string, bool>& map, aiNode* currentNode);
+	Bone* recursivelyCreateSkeleton(aiNode* node, Bone* parent, std::map<std::string, bool>& map);
 public:
 	Mesh(aiMesh *mesh, aiNode* node, aiNode* rootNode, const aiMatrix4x4& transform);
 	~Mesh(void);

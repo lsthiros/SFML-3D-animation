@@ -40,10 +40,12 @@ Mesh::Mesh(aiMesh *mesh, aiNode* node, aiNode* rootNode, const aiMatrix4x4& tran
 
 Bone* Mesh::constructSkeleton() {
 	std::map<std::string, bool> boneNecessityMap;
-	findNecessaryBones(boneNecessityMap);
+	//find out what bones are needed
+	aiNode* skeletonRoot=findNecessaryBones(boneNecessityMap);
 	return (Bone*)NULL;
 
 };
+
 
 /*this function takes a starting node, puts its name in the necessity register as false, and then
 ||goes through each of its children recursively and marks then as false (not necessary). This is
@@ -60,9 +62,29 @@ void Mesh::recursivelyZeroNecessityMap(std::map<std::string, bool>& map, aiNode*
 	};
 };
 
-void Mesh::findNecessaryBones(std::map<std::string, bool>& map) {
-	recursivelyZeroNecessityMap(map, m_node->mParent);
+//this function first marks all nodes as not-needed, then figures out
+//which ones will actually affect the mesh object. NOTE: I do not know if
+//I should mark the parents of the mesh as necessary. It would be needed for
+//more complicated models, but not this.
+aiNode* Mesh::findNecessaryBones(std::map<std::string, bool>& map) {
+	//mark everything as not needed.
+	recursivelyZeroNecessityMap(map, m_root);
+	//then go and mark the needed ones as such
+	aiNode* skeletonRoot;
+	for(size_t boneIndex=0; boneIndex<m_mesh->mNumBones; boneIndex++) {
+		aiNode* currentNode = m_root->FindNode(m_mesh->mBones[boneIndex]->mName.data);
+		skeletonRoot=recursivelyFindNecessaryBones(map, currentNode);
+	};
+	return skeletonRoot;
 };
+
+aiNode* Mesh::recursivelyFindNecessaryBones(std::map<std::string, bool>& map, aiNode* currentNode) {
+	map[currentNode->mName.data]=true;
+
+	if(currentNode->mParent->mName.data == m_node->mParent->mName.data || currentNode->mParent==NULL || currentNode->mParent->mName.data == m_node->mName.data) return currentNode;
+
+	return recursivelyFindNecessaryBones(map, currentNode->mParent);
+}
 
 //TODO make sure all memory is unallocated
 Mesh::~Mesh(void)

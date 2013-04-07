@@ -1,13 +1,14 @@
 #include "Model.hpp"
 
-void Model::addMesh(aiNode* meshContainingNode, aiNode* rootNode) {
+void inline Model::addMesh(aiNode* meshContainingNode, aiNode* rootNode, unsigned int meshIndex) {
+	Mesh* currentMesh = new Mesh(m_scene->mMeshes[meshContainingNode->mMeshes[meshIndex]],meshContainingNode,m_scene->mRootNode,meshContainingNode->mTransformation);
 	m_meshes.push_back((Mesh*)NULL);
 }
 
 void Model::recursivelyFindMeshes(aiNode* currentNode) {
 	if(currentNode->mNumMeshes > 0) {
 		for(size_t meshIndex=0; meshIndex < currentNode->mNumMeshes; meshIndex++) {
-			addMesh(currentNode, m_scene->mRootNode);
+			addMesh(currentNode, m_scene->mRootNode,meshIndex);
 		};
 	};
 

@@ -23,6 +23,5 @@ private:
 	const aiScene* m_scene;
 	MeshList m_meshes;
 	void recursivelyFindMeshes(aiNode* currentNode);
-
-	void addMesh(aiNode* meshContainingNode, aiNode* rootNode);
+	void inline addMesh(aiNode* meshContainingNode, aiNode* rootNode, unsigned int meshIndex);
 };
