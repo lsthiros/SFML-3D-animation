@@ -16,12 +16,13 @@ private:
 	aiMatrix4x4 m_transform, m_global, m_offset;
 	bool m_root;
 public:
-	Bone(aiMatrix4x4 transform, aiMatrix4x4 global, aiMatrix4x4 offset, std::string name);
+	Bone(aiMatrix4x4 transform, aiMatrix4x4 global);
 	~Bone(void);
 	bool hasChildren();
 	bool isRoot(){return m_root;};
 	int getNumChildren() {return m_numChildren;};
 	Bone* getChildren() {return m_children;};
+	aiMatrix4x4 getGlobalMatrix() {return m_global;};
 	void updateChildTransforms(aiMatrix4x4& parentMatrix);
 };
 

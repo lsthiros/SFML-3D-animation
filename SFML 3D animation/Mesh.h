@@ -30,12 +30,16 @@ private:
 	std::string name;
 	//root bone of the skeleton associated with this model
 	Bone* m_skeleton;
+	//and then a vector of bones
+	std::vector<Bone*> m_boneList;
+	//and map to translate bone names to list index
+	std::map<std::string, unsigned int> m_boneNameToOffset;
 	//private functions
 	Bone* constructSkeleton();
 	aiNode* findNecessaryBones(std::map<std::string, bool>& map);
 	void recursivelyZeroNecessityMap(std::map<std::string, bool>& map, aiNode* currentNode);
 	aiNode* recursivelyFindNecessaryBones(std::map<std::string, bool>& map, aiNode* currentNode);
-	Bone* recursivelyCreateSkeleton(aiNode* node, Bone* parent, std::map<std::string, bool>& map);
+	Bone* recursivelyCreateSkeleton(aiNode* node, Bone* parent, std::map<std::string, bool>& map,const aiMatrix4x4& parentOffset);
 public:
 	Mesh(aiMesh *mesh, aiNode* node, aiNode* rootNode, const aiMatrix4x4& transform);
 	~Mesh(void);

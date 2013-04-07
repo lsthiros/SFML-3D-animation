@@ -38,12 +38,24 @@ Mesh::Mesh(aiMesh *mesh, aiNode* node, aiNode* rootNode, const aiMatrix4x4& tran
 	constructSkeleton();
 }
 
+Bone* Mesh::recursivelyCreateSkeleton(aiNode* node, Bone* parent, std::map<std::string, bool>& map,const aiMatrix4x4& parentOffset) {
+	//gross hacky way of getting this to work.
+	Bone* newBone =new Bone(node->mTransformation,(parent==NULL) ? node->mTransformation : node->mTransformation*parentOffset);
+	m_boneNameToOffset[node->mName.data]=m_boneList.size();
+	m_boneList.push_back(newBone);
+	for(size_t childIndex=0;childIndex<node->mNumChildren;childIndex++) {
+		if(map[node->mChildren[childIndex]->mName.data]) recursivelyCreateSkeleton(node->mChildren[childIndex], newBone, map, newBone->getGlobalMatrix());
+	};
+	return newBone;
+};
+
 Bone* Mesh::constructSkeleton() {
 	std::map<std::string, bool> boneNecessityMap;
 	//find out what bones are needed
 	aiNode* skeletonRoot=findNecessaryBones(boneNecessityMap);
-	return (Bone*)NULL;
-
+	//this is also weird...
+	aiMatrix4x4* identity = new aiMatrix4x4();
+	return recursivelyCreateSkeleton(skeletonRoot, NULL, boneNecessityMap, *identity);
 };
 
 
