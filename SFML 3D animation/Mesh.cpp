@@ -17,12 +17,18 @@ Mesh::Mesh(aiMesh *mesh, aiNode* node, aiNode* rootNode, const aiMatrix4x4& tran
 		m_vertices[i].normal[0]=m_mesh->mNormals[i][0];
 		m_vertices[i].normal[1]=m_mesh->mNormals[i][1];
 		m_vertices[i].normal[2]=m_mesh->mNormals[i][2];
+		//initialize the weights as 0 and the ID's as -1, that should prevent any mishaps
+		//have to remember that for the shaders though...
+		for(int weightIndex=0;weightIndex<4;weightIndex++) {
+			m_vertices[i].boneId[weightIndex]=-1;
+			m_vertices[i].boneWeighs[weightIndex]=0.0f;
+		};
 	};
 	//These vertices are NOT COMPLETE. They only contain
 	//normals and modelspace coordinates.
 
 	//==========================================================
-	//==========================TODO============================
+	//==========================DONE============================
 	//==========================================================
 	//find a list of all ai nodes that are effectively part of the skeleton
 	//do this by looking at the list of aimesh's aibones, marking each one and its ancestors
@@ -35,16 +41,28 @@ Mesh::Mesh(aiMesh *mesh, aiNode* node, aiNode* rootNode, const aiMatrix4x4& tran
 	//
 	//After you have a list of necessary aiNodes, start at the one that shares its root with the mesh
 	//make it known that its the root bone
-	constructSkeleton();
+	m_skeleton=constructSkeleton();
+	//assign weights
+	for(size_t boneIndex=0;boneIndex<m_mesh->mNumBones;boneIndex++) {
+		for(size_t weightIndex=0;weightIndex<m_mesh->mBones[boneIndex]->mNumWeights;weightIndex++) {
+			//HERESY ALERT:
+			//need to find out how many weights each vertex has in it.
+			//might use a map
+			m_vertices[m_mesh->mBones[boneIndex]->mWeights[weightIndex].mVertexId].boneId[1/*THIS IS NOT RIGHT. FIX IT.*/]=m_boneNameToOffset[m_mesh->mBones[boneIndex]->mName.data];
+
+	};
 }
 
+//recursively creates a group of Bones resembling the tree given at the parent node.
 Bone* Mesh::recursivelyCreateSkeleton(aiNode* node, Bone* parent, std::map<std::string, bool>& map,const aiMatrix4x4& parentOffset) {
 	//gross hacky way of getting this to work.
-	Bone* newBone =new Bone(node->mTransformation,(parent==NULL) ? node->mTransformation : node->mTransformation*parentOffset);
+	Bone* newBone =new Bone(node->mTransformation,(parent==NULL) ? node->mTransformation : node->mTransformation*parentOffset, parent);
 	m_boneNameToOffset[node->mName.data]=m_boneList.size();
 	m_boneList.push_back(newBone);
+	//for every child node that is marked as necessary, add a corresponding Bone as a child to the
+	//current bone.
 	for(size_t childIndex=0;childIndex<node->mNumChildren;childIndex++) {
-		if(map[node->mChildren[childIndex]->mName.data]) recursivelyCreateSkeleton(node->mChildren[childIndex], newBone, map, newBone->getGlobalMatrix());
+		if(map[node->mChildren[childIndex]->mName.data]) newBone->addChild(recursivelyCreateSkeleton(node->mChildren[childIndex], newBone, map, newBone->getGlobalMatrix()));
 	};
 	return newBone;
 };
@@ -55,7 +73,11 @@ Bone* Mesh::constructSkeleton() {
 	aiNode* skeletonRoot=findNecessaryBones(boneNecessityMap);
 	//this is also weird...
 	aiMatrix4x4* identity = new aiMatrix4x4();
-	return recursivelyCreateSkeleton(skeletonRoot, NULL, boneNecessityMap, *identity);
+	Bone* rootBone = recursivelyCreateSkeleton(skeletonRoot, NULL, boneNecessityMap, *identity);
+	//The bones do not have their offset matrices created yet, they need to be set.
+	for(size_t boneIndex=0; boneIndex<m_mesh->mNumBones;boneIndex++) {
+		m_boneList[m_boneNameToOffset[m_mesh->mBones[boneIndex]->mName.data]]->setOffset(m_mesh->mBones[boneIndex]->mOffsetMatrix);
+	};
 };
 
 
