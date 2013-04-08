@@ -43,13 +43,17 @@ Mesh::Mesh(aiMesh *mesh, aiNode* node, aiNode* rootNode, const aiMatrix4x4& tran
 	//make it known that its the root bone
 	m_skeleton=constructSkeleton();
 	//assign weights
+	//an array to keep track of how many weights have been added to each vertex
+	std::vector<unsigned int> weightList(m_numVertices, 0);
 	for(size_t boneIndex=0;boneIndex<m_mesh->mNumBones;boneIndex++) {
 		for(size_t weightIndex=0;weightIndex<m_mesh->mBones[boneIndex]->mNumWeights;weightIndex++) {
-			//HERESY ALERT:
-			//need to find out how many weights each vertex has in it.
-			//might use a map
-			m_vertices[m_mesh->mBones[boneIndex]->mWeights[weightIndex].mVertexId].boneId[1/*THIS IS NOT RIGHT. FIX IT.*/]=m_boneNameToOffset[m_mesh->mBones[boneIndex]->mName.data];
-
+			unsigned int& currentId=weightList[m_mesh->mBones[boneIndex]->mWeights[weightIndex].mVertexId];
+			if(currentId<4) {
+				m_vertices[m_mesh->mBones[boneIndex]->mWeights[weightIndex].mVertexId].boneId[currentId]=m_boneNameToOffset[m_mesh->mBones[boneIndex]->mName.data];
+				m_vertices[m_mesh->mBones[boneIndex]->mWeights[weightIndex].mVertexId].boneWeighs[currentId]=m_mesh->mBones[boneIndex]->mWeights[weightIndex].mWeight;
+				currentId++;
+			};
+		};
 	};
 }
 
@@ -78,6 +82,7 @@ Bone* Mesh::constructSkeleton() {
 	for(size_t boneIndex=0; boneIndex<m_mesh->mNumBones;boneIndex++) {
 		m_boneList[m_boneNameToOffset[m_mesh->mBones[boneIndex]->mName.data]]->setOffset(m_mesh->mBones[boneIndex]->mOffsetMatrix);
 	};
+	return rootBone;
 };
 
 

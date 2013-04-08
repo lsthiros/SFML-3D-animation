@@ -7,7 +7,7 @@ Bone::Bone(aiMatrix4x4 transform, aiMatrix4x4 global, Bone* parent) :
 	m_parent(parent)
 {
 	m_numChildren=0;
-	m_offset = 
+	m_offset = aiMatrix4x4();
 }
 
 void Bone::addChild(Bone* child) {
