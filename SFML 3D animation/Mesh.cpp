@@ -24,8 +24,6 @@ Mesh::Mesh(aiMesh *mesh, aiNode* node, aiNode* rootNode, const aiMatrix4x4& tran
 			m_vertices[i].boneWeighs[weightIndex]=0.0f;
 		};
 	};
-	//These vertices are NOT COMPLETE. They only contain
-	//normals and modelspace coordinates.
 
 	//==========================================================
 	//==========================DONE============================

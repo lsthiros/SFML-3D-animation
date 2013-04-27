@@ -84,6 +84,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AnimationChannel.cpp" />
     <ClCompile Include="Bone.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mesh.cpp" />
@@ -91,6 +92,7 @@
     <ClCompile Include="Skeleton.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AnimationChannel.h" />
     <ClInclude Include="Bone.h" />
     <ClInclude Include="main.hpp" />
     <ClInclude Include="Mesh.h" />
